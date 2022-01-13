@@ -16,6 +16,7 @@ class MyThresholdAssistant(QtWidgets.QMainWindow, Ui_MainWindow, MyImage):
         self.LAB = [0, 100, -128, 127, -128, 127]
         self.HSV = [0, 180, 0, 255, 0, 255]
         self.RGB = [0, 255, 0, 255, 0, 255]
+        self.imgPath = ""
         self.connect()  # 连接控件和槽函数
         self.changeGamut()  # 获取色彩空间，并初始化设置
         self.loadImage()  # 加载图片并显示
@@ -41,8 +42,10 @@ class MyThresholdAssistant(QtWidgets.QMainWindow, Ui_MainWindow, MyImage):
 
     def loadImage(self):
         """加载图片并显示"""
-        self.imgPath, fileType = QFileDialog.getOpenFileName(
+        imgPath, fileType = QFileDialog.getOpenFileName(
             self, "选择图片", os.getcwd(), "*.jpg *.jpeg *.png")
+        if(imgPath):
+            self.imgPath = imgPath
         self.getImage(self.imgPath)
         self.showImage()
 
