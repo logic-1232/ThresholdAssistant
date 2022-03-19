@@ -6,7 +6,8 @@ from PIL import Image
 class MyImage(object):
     def getImage(self, imgPath) -> None:
         if(imgPath):
-            self.img = cv2.imread(imgPath)
+            # self.img = cv2.imread(imgPath)
+            self.img = cv2.imdecode(np.fromfile(imgPath, dtype=np.uint8), -1)
             self.img = cv2.resize(self.img, (512, 512))
             self.img_rgb = cv2.cvtColor(self.img, cv2.COLOR_BGR2RGB)
             self.Qimg = Image.fromarray(self.img_rgb).toqpixmap()
